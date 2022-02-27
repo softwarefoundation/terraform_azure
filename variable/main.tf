@@ -11,13 +11,8 @@ provider "azurerm" {
   features {}
 }
 
-variable "localizacao" {
-  type = string
-  default = "brazilsouth"
-  description = "Localização de recursos do Azure. Ex brazilsouth"
-}
-
 resource "azurerm_resource_group" "rg_localizacao" {
   location = var.localizacao
   name     = "rg_localizacao"
+  tags     = var.tags
 }
