@@ -12,3 +12,14 @@ variable "tags" {
     autor = "Yan"
   }
 }
+
+variable "rg_nome" {
+  type = string
+  description = "Nome do Resource Group"
+  default = "rg_main_databases"
+}
+
+variable "vnet_ips" {
+  type = list
+  default = ["10.0.0.0/16","192.168.0.0/16"]
+}

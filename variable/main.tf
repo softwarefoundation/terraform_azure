@@ -11,8 +11,16 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg_localizacao" {
+resource "azurerm_resource_group" "rg_databases" {
   location = var.localizacao
-  name     = "rg_localizacao"
+  name     = var.rg_nome
   tags     = var.tags
 }
+
+resource "azurerm_virtual_network" "vnet" {
+  address_space       = var.vnet_ips
+  location            = var.localizacao
+  name                = "vnet_terraform-treinamento"
+  resource_group_name = "${azurerm_resource_group.rg_databases.name}"
+}
+
