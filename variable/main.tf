@@ -14,7 +14,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg_databases" {
   location = var.localizacao
   name     = var.rg_nome
-  tags     = var.tags
+  tags     = merge(var.tags, {
+    treinamento = "terraform"
+  })
 }
 
 resource "azurerm_virtual_network" "vnet" {
