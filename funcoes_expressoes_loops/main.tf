@@ -15,11 +15,11 @@ resource "azurerm_resource_group" "grupo-recurso" {
 
 variable "vnet_ips" {
   type = list
-  default = ["10.0.0.0/16"]
+  default = ["10.0.0.0/8"]
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  address_space       = concat(var.vnet_ips, ["192.168.0.0/16"])
+  address_space       = length(var.vnet_ips) == 0 ? ["192.168.0.0/16","192.168.0.0/16"] : var.vnet_ips
   location            = "brazilsouth"
   name                = "vnet_treinamento_azure"
   resource_group_name = "${azurerm_resource_group.grupo-recurso.name}"
