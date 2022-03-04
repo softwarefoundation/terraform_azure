@@ -3,8 +3,9 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "grupo-recurso" {
+  count = 2
   location = "brazilsouth"
-  name     = "rg-terraform-modulo-5"
+  name     = "rg-terraform-modulo-5-${count.index}"
   tags = {
     data = formatdate("DD MMM YYYY hh:mm ZZZ", timestamp()),
     ambiente = lower("Homologacao")
@@ -22,7 +23,7 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = length(var.vnet_ips) == 0 ? ["192.168.0.0/16","192.168.0.0/16"] : var.vnet_ips
   location            = "brazilsouth"
   name                = "vnet_treinamento_azure"
-  resource_group_name = "${azurerm_resource_group.grupo-recurso.name}"
+  resource_group_name = "rg-terraform-modulo-5-1"
 }
 
 output "vnet_lista_ips" {
